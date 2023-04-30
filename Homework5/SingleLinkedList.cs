@@ -10,7 +10,6 @@ namespace Homework5
     public class SingleLinkedList
     {
         public Node first;
-        int[] arr = new int[5];
         public SingleLinkedList()
         {
             first = null;
@@ -80,77 +79,85 @@ namespace Homework5
 
         public void RemoveFromEnd()
         {
-            if (first == null)
+            if (first != null)
             {
-                return;
+                if (first.Link != null)
+                {
+                    Node current = first;
+                    while (current.Link.Link != null)
+                    {
+                        current = current.Link;
+                    }
+                    current.Link = null;
+
+                }
+                else
+                    first = null;
+
             }
-            if (first.Link == null)
-            {
-                first = null;
-                return;
-            }
-            Node current = first;
-            while (current.Link.Link != null)
-            {
-                current = current.Link;
-            }
-            current.Link = null;
+
         }
 
         public void RemoveFromBeginning()
         {
-            if (first == null)
+            if (first != null)
             {
-                return;
+                first = first.Link;
+
             }
-            first = first.Link;
         }
         public void RemoveNodeByIndex(int index)
         {
-            if (first == null)
-                return;
-
-            if (index == 0) 
+            if (first != null)
             {
-                first = first.Link; 
-                return;
+
+                if (index != 0)
+                {
+                    Node current = first;
+                    int currentIndex = 0;
+                    while (current.Link != null && currentIndex < index - 1)
+                    {
+                        current = current.Link;
+                        currentIndex++;
+                    }
+
+                    if (current.Link != null || currentIndex == index - 1)
+                        current.Link = current.Link.Link;
+
+                }
+                else
+                    first = first.Link;
+
+
             }
 
-            Node current = first;
-            int currentIndex = 0;
-            while (current.Link != null && currentIndex < index - 1) 
-            {
-                current = current.Link;
-                currentIndex++;
-            }
-
-            if (current.Link == null || currentIndex != index - 1) 
-                return;
-
-            current.Link = current.Link.Link; 
         }
         public void AddNode(int value, int index)
         {
-            if (index == 0) 
+            if (index != 0)
             {
-                AddToBeginning(value); 
-                return;
+                Node current = first;
+                int currentIndex = 0;
+                while (current != null && currentIndex < index - 1)
+                {
+                    current = current.Link;
+                    currentIndex++;
+                }
+
+                if (current != null || currentIndex == index - 1)
+                {
+
+                    Node newNode = new Node(value);
+                    newNode.Link = current.Link;
+                    current.Link = newNode;
+                }
+
+
             }
+            else
+                AddToBeginning(value);
 
-            Node current = first;
-            int currentIndex = 0;
-            while (current != null && currentIndex < index - 1) 
-            {
-                current = current.Link;
-                currentIndex++;
-            }
 
-            if (current == null || currentIndex != index - 1) 
-                return;
-
-            Node newNode = new Node(value); 
-            newNode.Link = current.Link; 
-            current.Link = newNode; 
         }
         public void RemoveRange(int start, int end)
         {
@@ -182,6 +189,24 @@ namespace Homework5
                     index++;
                 }
             }
+        }
+        public void ListBoxUPD(SingleLinkedList list,ListBox listBox1)
+        {
+            if (first == null)
+            {
+                listBox1.Items.Clear();
+            }
+            listBox1.Items.Clear();
+            Node current = list.first;
+            while (current != null)
+            {
+                listBox1.Items.Add(current.Info);
+                current = current.Link;
+            }
+        }
+        public void Destroy()
+        {
+            first = null;
         }
 
     }

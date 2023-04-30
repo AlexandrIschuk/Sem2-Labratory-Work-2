@@ -26,20 +26,7 @@ namespace Homework5
                 Application.Exit();
             }
         }
-        public void ListBoxUPD(SingleLinkedList list)
-        {
-            if (list.first == null)
-            {
-                listBox1.Items.Clear();
-            }
-            listBox1.Items.Clear();
-            Node current = list.first;
-            while (current != null)
-            {
-                listBox1.Items.Add(current.Info);
-                current = current.Link;
-            }
-        }
+
 
         private void ÒÓÁ‰‡ÌËÂ—ÔËÒÍ‡ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -58,7 +45,7 @@ namespace Homework5
                 else
                     numbers[i] = int.Parse(strNumbers[i]);
                 list.AddRangeToEnd(numbers);
-                ListBoxUPD(list);
+                list.ListBoxUPD(list, listBox1);
 
             }
             else
@@ -71,8 +58,8 @@ namespace Homework5
 
         private void ‡ÁÛ¯ÂÌËÂToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            list.first = null;
-            ListBoxUPD(list);
+            list.Destroy();
+            list.ListBoxUPD(list, listBox1);
 
         }
 
@@ -89,7 +76,7 @@ namespace Homework5
                 {
 
                     list.AddToBeginning(N);
-                    ListBoxUPD(list);
+                    list.ListBoxUPD(list, listBox1);
                 }
 
             }
@@ -112,7 +99,7 @@ namespace Homework5
                 {
 
                     list.AddToEnd1(N);
-                    ListBoxUPD(list);
+                    list.ListBoxUPD(list, listBox1);
                 }
 
             }
@@ -127,13 +114,13 @@ namespace Homework5
         private void ‚Õ‡˜‡ÎÂToolStripMenuItem_Click(object sender, EventArgs e)
         {
             list.RemoveFromBeginning();
-            ListBoxUPD(list);
+            list.ListBoxUPD(list, listBox1);
         }
 
         private void ‚ ÓÌˆÂToolStripMenuItem_Click(object sender, EventArgs e)
         {
             list.RemoveFromEnd();
-            ListBoxUPD(list);
+            list.ListBoxUPD(list, listBox1);
         }
 
         private void ‚œÓËÁ‚ÓÎ¸ÌÛ˛ToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -147,7 +134,7 @@ namespace Homework5
             {
 
                 list.RemoveNodeByIndex(N);
-                ListBoxUPD(list);
+                list.ListBoxUPD(list, listBox1);
             }
 
         }
@@ -159,7 +146,7 @@ namespace Homework5
             if(form1.DialogResult == DialogResult.OK)
             {
                 list.AddNode(form1._s1, form1._s);
-                ListBoxUPD(list);
+                list.ListBoxUPD(list, listBox1);
 
             }
         }
@@ -177,7 +164,7 @@ namespace Homework5
             if(form4.DialogResult == DialogResult.OK)
             {
                 list.RemoveRange(form4._s, form4._s1);
-                ListBoxUPD(list);
+                list.ListBoxUPD(list, listBox1);
             }
         }
     }
